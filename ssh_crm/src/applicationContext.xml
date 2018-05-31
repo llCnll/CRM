@@ -72,14 +72,23 @@
 	<bean name="userAction" class="web.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
+	<bean name="customerAction" class="web.action.CustomerAction" scope="prototype">
+		<property name="cs" ref="customerService"></property>
+	</bean>
 	
 	<!-- service -->
 	<bean name="userService" class="service.impl.UserServiceImpl">
 		<property name="ud" ref="userDao"></property>
 	</bean>
+	<bean name="customerService" class="service.impl.CustomerServiceImpl">
+		<property name="cd" ref="customerDao"></property>
+	</bean>
 	
 	<!-- dao -->
 	<bean name="userDao" class="dao.impl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean name="customerDao" class="dao.impl.CustomerDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
