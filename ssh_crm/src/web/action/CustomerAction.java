@@ -1,5 +1,7 @@
 package web.action;
 
+import java.io.File;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -19,10 +21,17 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	private Integer currentPage;
 	private Integer pageSize;
 	private CustomerService cs;
+	//在后台提供一个与前台input type=file 组件name相同的属性
+	private File photo;	//上传的文件会自动封装到File对象
+	private String photoFileName;//在提交键名后加上固定FileName, 文件名称会自动封装到属性中
+	private String photoContentType;//在提交键名后加上固定ContentType, 文件MIME类型会自动封装到属性中 text/html
 	
 	public String add() throws Exception {
+		System.out.println("photoFileName: "+photoFileName);//Hearthstone Screenshot 04-13-18 13.22.25.png
+		System.out.println("photoContentType: "+ photoContentType);//image/png
+		//将上传的文件保存到指定位置
+		photo.renameTo(new File("f:/photo.jpg"));
 		
-		System.out.println(customer);
 		cs.save(customer);
 		
 		return "toList";
@@ -60,5 +69,24 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		// TODO Auto-generated method stub
 		return customer;
 	}
+	public File getPhoto() {
+		return photo;
+	}
+	public void setPhoto(File photo) {
+		this.photo = photo;
+	}
+	public String getPhotoFileName() {
+		return photoFileName;
+	}
+	public void setPhotoFileName(String photoFileName) {
+		this.photoFileName = photoFileName;
+	}
+	public String getPhotoContentType() {
+		return photoContentType;
+	}
+	public void setPhotoContentType(String photoContentType) {
+		this.photoContentType = photoContentType;
+	}
+	
 
 }

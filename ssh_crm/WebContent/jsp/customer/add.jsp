@@ -62,7 +62,17 @@
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
-	<FORM id=form1 name=form1 action="${pageContext.request.contextPath }/CustomerAction_add" method=post>
+	<!-- 
+		图片上传页面的3个要求
+			1.表单必须post提交
+			2.表单提交类型enctype 必须多段式
+			3.文件上传<input type="file" />组件
+	
+	 -->
+
+	<FORM id=form1 name=form1 
+			action="${pageContext.request.contextPath }/CustomerAction_add" method=post
+			enctype="multipart/form-data">
 		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -126,6 +136,14 @@
 								<td>
 								<INPUT class=textbox id=sChannel2
 														style="WIDTH: 180px" maxLength=50 name="cust_mobile">
+								</td>
+							</TR>
+							
+							<TR>
+								<td>图片上传 ：</td>
+								<td>
+								<INPUT type="file"
+														style="WIDTH: 180px" maxLength=50 name="photo">
 								</td>
 							</TR>
 							
