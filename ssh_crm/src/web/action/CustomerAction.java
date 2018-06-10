@@ -20,6 +20,13 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	private Integer pageSize;
 	private CustomerService cs;
 	
+	public String add() throws Exception {
+		
+		System.out.println(customer);
+		cs.save(customer);
+		
+		return "toList";
+	}
 	public String list() throws Exception {
 		
 		//封装离线查询对象
@@ -30,14 +37,10 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 		}
 		//1 调用Service查询分页数据(PageBean)
 		PageBean pb = cs.getPageBean(dc, currentPage, pageSize);
-		System.out.println(pb);
+		//System.out.println(pb);
 		//2 将PageBean放入request域,转发到列表页面显示
 		ActionContext.getContext().put("PageBean", pb);
 		return "list";
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 
 	public void setCurrentPage(Integer currentPage) {

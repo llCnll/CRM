@@ -22,7 +22,7 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<!-- 配置事务通知 -->
-	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="save*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
 			<tx:method name="persist*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="false"/>
@@ -33,16 +33,16 @@
 			<tx:method name="get*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>
 			<tx:method name="find*" isolation="REPEATABLE_READ" propagation="REQUIRED" read-only="true"/>
 		</tx:attributes>
-	</tx:advice> -->
+	</tx:advice>
 	
 	<!-- 配置切点 -->
 	<!-- 配置切面 -->
-	<!-- <aop:config>
+	<aop:config>
 		<aop:pointcut expression="execution(* service.impl.*ServiceImpl.*(..))" id="txPc"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"/>
-	</aop:config> -->
+	</aop:config>
 	<!-- 开启注解事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven> -->
 	
 	<!-- 在spring配置中放置hibernate配置信息 -->
 	<bean name="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -75,6 +75,9 @@
 	<bean name="customerAction" class="web.action.CustomerAction" scope="prototype">
 		<property name="cs" ref="customerService"></property>
 	</bean>
+	<bean name="baseDictAction" class="web.action.BaseDictAction" scope="prototype">
+		<property name="bds" ref="baseDictService"></property>
+	</bean>
 	
 	<!-- service -->
 	<bean name="userService" class="service.impl.UserServiceImpl">
@@ -83,12 +86,18 @@
 	<bean name="customerService" class="service.impl.CustomerServiceImpl">
 		<property name="cd" ref="customerDao"></property>
 	</bean>
+	<bean name="baseDictService" class="service.impl.BaseDictServiceImpl">
+		<property name="bdd" ref="baseDictDao"></property>
+	</bean>
 	
 	<!-- dao -->
 	<bean name="userDao" class="dao.impl.UserDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean name="customerDao" class="dao.impl.CustomerDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean name="baseDictDao" class="dao.impl.BaseDictDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 

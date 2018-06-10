@@ -9,12 +9,60 @@
 <LINK href="${pageContext.request.contextPath }/css/Style.css" type=text/css rel=stylesheet>
 <LINK href="${pageContext.request.contextPath }/css/Manage.css" type=text/css
 	rel=stylesheet>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+	//使用ajax加载数据字典, 生成select
+	//参数1: 数据字典类型(dict_type_code)
+	//参数2: 将下拉框放入的标签id
+	//参数3: 生成下拉选时, select标签的属性值
+	//参数4: 需要回显时, 选中那个option
+	function loadSelect(typecode,positionId,selectname,selectedId){
+		//1. 创建select对象, 将name属性指定
+		var $select = $("<select name="+selectname+"></select>");
+		//2. 添加提示选项
+		$select.append($("<option value=''>--请选择--</option>"));
+		//3. 使用ajax方法, 访问后台Action
+		$.ajax({
+			url:"${pageContext.request.contextPath}/BaseDictAction",
+			data:{"dict_type_code":typecode},
+			async:true,
+			type:"POST",
+			success:function(data){
+				//4. 返回json数组对象, 对其遍历
+				$.each(data, function(i, json){
+					var $option = $("<option value='"+json['dict_id']+"'>"+json['dict_item_name']+"</option>");
+					//alert($option);
+					//判断回显
+					if(json['dict_id'] == selectedId){
+						$option.attr("selected", "selected");
+					}
+					
+					$select.append($option);
+				});
+				
+			},
+			error:function(){
+				alert("请求失败");
+			},
+			dataType:"json"
+		});
+		
+		//5.将组装好的select对象放入页面指定位置
+		$('#'+positionId).append($select);
+	}
+	$(function(){
+		loadSelect("006", "level", "cust_level.dict_id", "");
+		loadSelect("002", "source", "cust_source.dict_id", "");
+		loadSelect("001", "industry", "cust_industry.dict_id", "");
+	});
+
+</script>
 
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
 </HEAD>
 <BODY>
-	<FORM id=form1 name=form1 action="${pageContext.request.contextPath }/customer_add" method=post>
+	<FORM id=form1 name=form1 action="${pageContext.request.contextPath }/CustomerAction_add" method=post>
 		
 
 		<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
@@ -54,29 +102,21 @@
 														style="WIDTH: 180px" maxLength=50 name="cust_name">
 								</td>
 								<td>客户级别 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_level">
+								<td id="level">
 								</td>
 							</TR>
 							
 							<TR>
 								
 								<td>信息来源 ：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_source">
+								<td id="source">
 								</td>
-								<td>联系人：</td>
-								<td>
-								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="cust_linkman">
+								<td>客户行业：</td>
+								<td id="industry">
 								</td>
 							</TR>
 							
 							<TR>
-								
-								
 								<td>固定电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2

@@ -102,8 +102,8 @@
 													<TR
 														style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
 														<TD><s:property value="#cust.cust_name"/></TD>
-														<TD><s:property value="#cust.cust_level"/></TD>
-														<TD><s:property value="#cust.cust_source"/></TD>
+														<TD><s:property value="#cust.cust_level.dict_item_name"/></TD>
+														<TD><s:property value="#cust.cust_source.dict_item_name"/></TD>
 														<TD><s:property value="#cust.cust_linkman"/></TD>
 														<TD><s:property value="#cust.cust_phone"/></TD>
 														<TD><s:property value="#cust.cust_mobile"/>m</TD>
@@ -164,5 +164,6 @@
 				</TR>
 			</TBODY>
 		</TABLE>
+		<s:debug></s:debug>
 </BODY>
 </HTML>

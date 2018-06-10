@@ -33,4 +33,9 @@ public class CustomerServiceImpl implements CustomerService {
 		this.cd = cd;
 	}
 
+	@Override
+	public void save(Customer customer) {
+		cd.save(customer);
+	}
+
 }
