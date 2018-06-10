@@ -26,11 +26,26 @@ public class CustomerAction extends ActionSupport implements ModelDriven<Custome
 	private String photoFileName;//在提交键名后加上固定FileName, 文件名称会自动封装到属性中
 	private String photoContentType;//在提交键名后加上固定ContentType, 文件MIME类型会自动封装到属性中 text/html
 	
+	
+	public String toEdit() throws Exception {
+		
+		//通过cust_id查询信息
+		Customer c = cs.getById(customer.getCust_id());
+		//存放至域中
+		ActionContext.getContext().put("customer", c);
+		
+		return "edit";
+	}
+	
 	public String add() throws Exception {
-		System.out.println("photoFileName: "+photoFileName);//Hearthstone Screenshot 04-13-18 13.22.25.png
-		System.out.println("photoContentType: "+ photoContentType);//image/png
-		//将上传的文件保存到指定位置
-		photo.renameTo(new File("f:/photo.jpg"));
+		
+		if(photo != null){
+			System.out.println("photoFileName: "+photoFileName);//Hearthstone Screenshot 04-13-18 13.22.25.png
+			System.out.println("photoContentType: "+ photoContentType);//image/png
+			
+			//将上传的文件保存到指定位置
+			photo.renameTo(new File("f:/photo.jpg"));
+		}
 		
 		cs.save(customer);
 		

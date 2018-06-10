@@ -21,6 +21,7 @@
 		</action>
 		<action name="CustomerAction_*" class="customerAction" method="{1}">
 			<result name="list">/jsp/customer/list.jsp</result>
+			<result name="edit">/jsp/customer/add.jsp</result>
 			<result name="error">/jsp/customer/list.jsp</result>
 			<result name="toList" type="redirectAction" >
 				<param name="namespace">/</param>

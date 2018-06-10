@@ -12,4 +12,6 @@ public interface CustomerService {
 
 	void save(Customer customer);
 
+	Customer getById(Long cust_id);
+
 }

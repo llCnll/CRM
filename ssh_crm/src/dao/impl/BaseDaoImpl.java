@@ -23,6 +23,10 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 		clazz = (Class)ptClass.getActualTypeArguments()[0];
 	}
 	
+	public void saveOrUpdate(T t){
+		getHibernateTemplate().saveOrUpdate(t);
+	}
+	
 	@Override
 	public void save(T t) {
 		getHibernateTemplate().save(t);
