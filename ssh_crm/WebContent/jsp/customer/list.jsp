@@ -23,6 +23,19 @@
 		
 		$("#customerForm").submit();
 	}
+	
+	function selectCustomer(cust_id, cust_name){
+		//获得add.jsp的window对象
+		var win = window.opener;
+		//获得add.jsp的documnet对象
+		var doc = win.document;
+		//获得隐藏域和文本框赋值;
+		doc.getElementById("cust_id").value=cust_id;
+		doc.getElementById("cust_name").value=cust_name;
+		//关闭当前窗口
+		window.close();
+	}
+	
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
@@ -66,6 +79,8 @@
 											<input type="hidden" id="currentPage" name="currentPage" value="<s:property value="#PageBean.currentPage"/>"/>
 											<!-- 隐藏域 每页显示个数 -->
 											<input type="hidden" id="pageSize" name="pageSize" value="<s:property value="#PageBean.pageSize"/>"/>
+											<!-- 隐藏域 每页显示个数 -->
+											<input type="hidden" id="select" name="select" value="<s:property value="#parameters.select"/>"/>
 											<TABLE cellSpacing=0 cellPadding=2 border=0>
 												<TBODY>
 													<TR>
@@ -108,9 +123,14 @@
 														<TD><s:property value="#cust.cust_phone"/></TD>
 														<TD><s:property value="#cust.cust_mobile"/></TD>
 														<TD>
-														<a href="${pageContext.request.contextPath }/CustomerAction_toEdit?cust_id=<s:property value="#cust.cust_id"/>">修改</a>
-														&nbsp;&nbsp;
-														<a href="${pageContext.request.contextPath }/customerServlet?method=delete&custId=${customer.cust_id}">删除</a>
+														<s:if test="#parameters.select==null">
+															<a href="${pageContext.request.contextPath }/CustomerAction_toEdit?cust_id=<s:property value="#cust.cust_id"/>">修改</a>
+															&nbsp;&nbsp;
+															<a href="${pageContext.request.contextPath }/customerServlet?method=delete&custId=${customer.cust_id}">删除</a>
+														</s:if>
+														<s:else>
+															<input type="button" value="选择" onclick="selectCustomer(<s:property value="#cust.cust_id"/>, '<s:property value="#cust.cust_name"/>')">
+														</s:else>
 														</TD>
 													</TR>
 												

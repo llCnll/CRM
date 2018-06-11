@@ -15,7 +15,7 @@
 </HEAD>
 <BODY>
 	<FORM id=form1 name=form1
-		action="${pageContext.request.contextPath }/linkmanServlet?method=addsubmit"
+		action="${pageContext.request.contextPath }/LinkManAction_add"
 		method=post>
 		
 
@@ -48,7 +48,11 @@
 						<TABLE cellSpacing=0 cellPadding=5  border=0>
 							<tr>
 								<td>所属客户：</td>
-								<td colspan="3"><input type="text" name="custId" style="WIDTH: 180px"/></td>
+								<td colspan="3">
+									<input type="hidden" name="cust_id" id="cust_id"/>
+									<input type="text" id="cust_name" style="WIDTH: 180px"/>
+									<input type="button" value="选择客户" onclick="window.open('${pageContext.request.contextPath}/CustomerAction_list?select=true','','width=500,height=200')"/>
+								</td>
 							</tr>
 							<TR>
 								<td>联系人名称：</td>
