@@ -30,6 +30,14 @@
 		</action>
 		<action name="BaseDictAction" class="baseDictAction">
 		</action>
+		<action name="LinkManAction_*" class="linkManAction" method="{1}">
+			<result name="error">/jsp/linkman/list.jsp</result>
+			<result name="list">/jsp/linkman/list.jsp</result>
+			<result name="toList">
+				<param name="namespace">/</param>
+				<param name="actionName">LinkmanAction_list</param>
+			</result>
+		</action>
 	
 	</package>
 

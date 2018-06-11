@@ -103,6 +103,15 @@ public class LinkMan {
 	public void setLkm_position(String lkm_position) {
 		this.lkm_position = lkm_position;
 	}
+	@Override
+	public String toString() {
+		return "LinkMan [lkm_id=" + lkm_id + ", lkm_gender=" + lkm_gender
+				+ ", lkm_name=" + lkm_name + ", lkm_phone=" + lkm_phone
+				+ ", lkm_email=" + lkm_email + ", lkm_qq=" + lkm_qq
+				+ ", lkm_mobile=" + lkm_mobile + ", lkm_memo=" + lkm_memo
+				+ ", lkm_position=" + lkm_position + ", customer=" + customer
+				+ ", cust_id=" + cust_id + "]";
+	}
 	
 	
 }

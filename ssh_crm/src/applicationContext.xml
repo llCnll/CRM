@@ -78,6 +78,9 @@
 	<bean name="baseDictAction" class="web.action.BaseDictAction" scope="prototype">
 		<property name="bds" ref="baseDictService"></property>
 	</bean>
+	<bean name="linkManAction" class="web.action.LinkManAction" scope="prototype">
+		<property name="lms" ref="linkManService"></property>
+	</bean>
 	
 	<!-- service -->
 	<bean name="userService" class="service.impl.UserServiceImpl">
@@ -89,6 +92,9 @@
 	<bean name="baseDictService" class="service.impl.BaseDictServiceImpl">
 		<property name="bdd" ref="baseDictDao"></property>
 	</bean>
+	<bean name="linkManService" class="service.impl.LinkManServiceImpl">
+		<property name="lmd" ref="linkManDao"></property>
+	</bean>
 	
 	<!-- dao -->
 	<bean name="userDao" class="dao.impl.UserDaoImpl">
@@ -98,6 +104,9 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean name="baseDictDao" class="dao.impl.BaseDictDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean name="linkManDao" class="dao.impl.LinkManDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 

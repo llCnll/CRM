@@ -49,7 +49,7 @@
 							<tr>
 								<td>所属客户：</td>
 								<td colspan="3">
-									<input type="hidden" name="cust_id" id="cust_id"/>
+									<input type="hidden" name="customer.cust_id" id="cust_id"/>
 									<input type="text" id="cust_name" style="WIDTH: 180px"/>
 									<input type="button" value="选择客户" onclick="window.open('${pageContext.request.contextPath}/CustomerAction_list?select=true','','width=500,height=200')"/>
 								</td>
@@ -58,24 +58,24 @@
 								<td>联系人名称：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkmName">
+														style="WIDTH: 180px" maxLength=50 name="lkm_name">
 								</td>
 								<td>联系人性别：</td>
 								<td>
-								<input type="radio" value="1" name="lkmGender">男
-								<input type="radio" value="2" name="lkmGender">女
+								<input type="radio" value="1" name="lkm_gender">男
+								<input type="radio" value="2" name="lkm_gender">女
 								</td>
 							</TR>
 							<TR>
 								<td>联系人办公电话 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkmPhone">
+														style="WIDTH: 180px" maxLength=50 name="lkm_phone">
 								</td>
 								<td>联系人手机 ：</td>
 								<td>
 								<INPUT class=textbox id=sChannel2
-														style="WIDTH: 180px" maxLength=50 name="lkmMobile">
+														style="WIDTH: 180px" maxLength=50 name="lkm_mobile">
 								</td>
 							</TR>
 							<tr>
