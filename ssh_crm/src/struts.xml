@@ -32,10 +32,11 @@
 		</action>
 		<action name="LinkManAction_*" class="linkManAction" method="{1}">
 			<result name="error">/jsp/linkman/list.jsp</result>
+			<result name="edit">/jsp/linkman/add.jsp</result>
 			<result name="list">/jsp/linkman/list.jsp</result>
-			<result name="toList">
+			<result name="toList" type="redirectAction">
 				<param name="namespace">/</param>
-				<param name="actionName">LinkmanAction_list</param>
+				<param name="actionName">LinkManAction_list</param>
 			</result>
 		</action>
 	

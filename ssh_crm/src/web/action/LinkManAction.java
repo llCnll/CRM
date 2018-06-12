@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import domain.Customer;
 import domain.LinkMan;
 import domain.PageBean;
 
@@ -19,6 +20,16 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 	private LinkManService lms;
 	private Integer currentPage;
 	private Integer pageSize;
+	
+	public String toEdit() throws Exception {
+		
+		//通过cust_id查询信息
+		LinkMan l = lms.getById(linkMan.getLkm_id());
+		//存放至域中
+		ActionContext.getContext().put("linkMan", l);
+		
+		return "edit";
+	}
 	
 	public String add() throws Exception {
 		
@@ -34,6 +45,9 @@ public class LinkManAction extends ActionSupport implements ModelDriven<LinkMan>
 		//判断并封装参数
 		if(StringUtils.isNotEmpty(linkMan.getLkm_name())&&StringUtils.isNotBlank(linkMan.getLkm_name())){
 			dc.add(Restrictions.ilike("lkm_name", "%"+linkMan.getLkm_name()+"%"));
+		}
+		if(linkMan.getCustomer()!=null && linkMan.getCustomer().getCust_id()!=null){
+			dc.add(Restrictions.eq("customer.cust_id", linkMan.getCustomer().getCust_id()));
 		}
 		//1 调用Service查询分页数据(PageBean)
 		PageBean pb = lms.getPageBean(dc, currentPage, pageSize);

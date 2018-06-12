@@ -12,13 +12,17 @@
 	rel=stylesheet>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.4.4.min.js"></script>
 <SCRIPT language=javascript>
-	function to_page(page){
-		if(page){
-			$("#page").val(page);
-		}
-		document.customerForm.submit();
-		
-	}
+function to_page(page){
+	
+	$('#currentPage').val(page);
+	
+	$("#customerForm").submit();
+}
+function changePageSize(pageSize){
+	$('#pageSize').val(pageSize);
+	
+	$("#customerForm").submit();
+}
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
@@ -70,6 +74,12 @@
 													<TD>联系人名称：</TD>
 													<TD><INPUT class=textbox id=sChannel2
 														style="WIDTH: 80px" maxLength=50 name="lkm_name" value="<s:property value="#parameters.lkm_name"/>"></TD>
+													<TD>客户名称：</TD>
+													<TD>
+														<input type="hidden" name="customer.cust_id" id="cust_id" value="<s:property value="#customer.cust_id"/>"/>
+														<input type="text" name="customer.cust_name" id="cust_name" style="WIDTH: 180px"value="<s:property value="#customer.cust_name"/>"/>
+														<input type="button" value="选择客户" onclick="window.open('${pageContext.request.contextPath}/CustomerAction_list?select=true','','width=500,height=200')"/>
+													</TD>
 													
 													<TD><INPUT class=button id=sButton2 type=submit
 														value=" 筛选 " name=sButton2></TD>
@@ -120,7 +130,7 @@
 								<TD><SPAN id=pagelink>
 										<DIV
 											style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
-											共[<B>${total}</B>]条记录,[<B>${totalPage}</B>]页
+											共[<B><s:property value='#PageBean.totalCount'/></B>]条记录,[<B><s:property value="#PageBean.totalPage"/></B>]页
 											,每页显示
 											<select name="pageSize">
 											
@@ -128,14 +138,14 @@
 											<option value="30" <c:if test="${pageSize==30 }">selected</c:if>>30</option>
 											</select>
 											条
-											[<A href="javascript:to_page(${page-1})">前一页</A>]
-											<B>${page}</B>
-											[<A href="javascript:to_page(${page+1})">后一页</A>] 
+											[<A href="javascript:to_page(<s:property value='#PageBean.currentPage-1'/>)">前一页</A>]
+											<B><s:property value="#PageBean.currentPage"/></B>
+											[<A href="javascript:to_page(<s:property value='#PageBean.currentPage+1'/>)">后一页</A>] 
 											到
-											<input type="text" size="3" id="page" name="page" />
+											<input type="text" size="3" id="page" name="page" value="<s:property value='#PageBean.currentPage'/>"/>
 											页
 											
-											<input type="button" value="Go" onclick="to_page()"/>
+											<input type="button" value="Go" onclick="to_page($('#page').val())"/>
 										</DIV>
 								</SPAN></TD>
 							</TR>
